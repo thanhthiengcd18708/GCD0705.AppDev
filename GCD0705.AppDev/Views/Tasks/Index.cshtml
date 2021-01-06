@@ -1,32 +1,40 @@
-﻿@model GCD0705.AppDev.Models.Task
+﻿@model IEnumerable<GCD0705.AppDev.Models.Task>
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Index";
 }
 
 <h2>Index Task</h2>
 
 <a href="" class="btn btn-primary">Create a Task</a>
 
+<form>
+  <label for="fname">Search by Task Name:</label><br>
+  <input type="text" id="fname" name="fname"><br>
+	<button type="submit" class="btn btn-primary">Search</button>
+</form>
 
 <table class="table table-bordered">
-<thead>
-<tr>
-  <th>Task #</th>
-  <th>Task Name</th>
-  <th>Task Due Date</th>
-  <th>Action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>@Model.Id</td>
-  <td>@Model.Name</td>
-  <td>@Model.DueDate.ToString()</td>
-  <td>
-  <a href="" class="btn btn-primary">Details</a>
-  <a href="" class="btn btn-default">Edit</a>
-  <a href="" class="btn btn-danger">Delete</a>
-  </td>
-</tr>
-</tbody>
+	<thead>
+		<tr>
+			<th>Task #</th>
+			<th>Task Name</th>
+			<th>Task Due Date</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.Id</td>
+				<td>@item.Name</td>
+				<td>@item.DueDate.ToString()</td>
+				<td>
+					@Html.ActionLink("Details","Details","Tasks", new { id = item.Id },  new { @class = "btn btn-primary" })
+					<a href="" class="btn btn-default">Edit</a>
+					<a href="" class="btn btn-danger">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
 </table>
