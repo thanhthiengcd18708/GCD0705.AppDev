@@ -8,8 +8,8 @@
 <a href="" class="btn btn-primary">Create a Task</a>
 
 <form>
-  <label for="fname">Search by Task Name:</label><br>
-  <input type="text" id="fname" name="fname"><br>
+	<label for="fname">Search by Task Name:</label><br>
+	<input type="text" id="fname" name="fname"><br>
 	<button type="submit" class="btn btn-primary">Search</button>
 </form>
 
@@ -30,7 +30,7 @@
 				<td>@item.Name</td>
 				<td>@item.DueDate.ToString()</td>
 				<td>
-					@Html.ActionLink("Details","Details","Tasks", new { id = item.Id },  new { @class = "btn btn-primary" })
+					@Html.ActionLink("Details", "Details", "Tasks", new { id = item.Id }, new { @class = "btn btn-primary" })
 					<a href="" class="btn btn-default">Edit</a>
 					<a href="" class="btn btn-danger">Delete</a>
 				</td>

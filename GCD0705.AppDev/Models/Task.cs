@@ -9,12 +9,5 @@ namespace GCD0705.AppDev.Models
 		public string Description { get; set; }
 		public DateTime DueDate { get; set; }
 
-		public Task(int id, string name, string description, DateTime dueDate)
-		{
-			Id = id;
-			Name = name;
-			Description = description;
-			DueDate = dueDate;
-		}
 	}
 }
