@@ -58,12 +58,22 @@ namespace GCD0705.AppDev.Controllers
 		[HttpGet]
 		public ActionResult Edit(int id)
 		{
-			return View();
+			var taskInDb = _context.Tasks.SingleOrDefault(t => t.Id == id);
+			if (taskInDb == null) return HttpNotFound();
+
+			return View(taskInDb);
 		}
 
 		[HttpPost]
 		public ActionResult Edit(Task task)
 		{
+			var taskInDb = _context.Tasks.SingleOrDefault(t => t.Id == task.Id);
+
+			taskInDb.Name = task.Name;
+			taskInDb.Description = task.Description;
+			taskInDb.DueDate = task.DueDate;
+
+			_context.SaveChanges();
 			return RedirectToAction("Index");
 		}
 	}

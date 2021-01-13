@@ -35,7 +35,9 @@
 					@Html.ActionLink("Details", "Details", "Tasks", 
 								 new { id = item.Id }, 
 								 new { @class = "btn btn-primary" })
-					<a href="" class="btn btn-default">Edit</a>
+					@Html.ActionLink("Edit this task", "Edit", "Tasks",
+								 new { id = item.Id },
+								 new {@class = "btn btn-default"})
 					@Html.ActionLink("Delete this Task", "Delete","Tasks", 
 								 new { id = item.Id}, 
 								 new { @class = "btn btn-danger"})
