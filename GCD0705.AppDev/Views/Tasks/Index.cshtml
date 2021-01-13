@@ -5,7 +5,9 @@
 
 <h2>Index Task</h2>
 
-<a href="" class="btn btn-primary">Create a Task</a>
+@Html.ActionLink("Create new Task", "Create", "Tasks",
+	null, 
+	new { @class = "btn btn-primary" })
 
 <form>
 	<label for="fname">Search by Task Name:</label><br>
@@ -30,9 +32,13 @@
 				<td>@item.Name</td>
 				<td>@item.DueDate.ToString()</td>
 				<td>
-					@Html.ActionLink("Details", "Details", "Tasks", new { id = item.Id }, new { @class = "btn btn-primary" })
+					@Html.ActionLink("Details", "Details", "Tasks", 
+								 new { id = item.Id }, 
+								 new { @class = "btn btn-primary" })
 					<a href="" class="btn btn-default">Edit</a>
-					@Html.ActionLink("Delete this Task", "Delete","Tasks", new { id = item.Id}, new { @class = "btn btn-danger"})
+					@Html.ActionLink("Delete this Task", "Delete","Tasks", 
+								 new { id = item.Id}, 
+								 new { @class = "btn btn-danger"})
 				</td>
 			</tr>
 		}

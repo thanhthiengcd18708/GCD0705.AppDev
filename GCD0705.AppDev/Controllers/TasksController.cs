@@ -43,6 +43,15 @@ namespace GCD0705.AppDev.Controllers
 		[HttpPost]
 		public ActionResult Create(Task task)
 		{
+			var newTask = new Task()
+			{
+				Name = task.Name,
+				Description = task.Description,
+				DueDate = task.DueDate
+			};
+
+			_context.Tasks.Add(newTask);
+			_context.SaveChanges();
 			return RedirectToAction("Index");
 		}
 
