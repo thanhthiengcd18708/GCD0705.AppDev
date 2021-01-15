@@ -1,4 +1,6 @@
 ﻿using GCD0705.AppDev.Models;
+using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -7,14 +9,24 @@ namespace GCD0705.AppDev.Controllers
 	public class TasksController : Controller
 	{
 		private ApplicationDbContext _context;
+		private UserManager<ApplicationUser> _userManager;
 		public TasksController()
 		{
 			_context = new ApplicationDbContext();
 		}
 		// GET: Tasks
-		public ActionResult Index()
+		public ActionResult Index(string searchString)
 		{
-			return View(_context.Tasks.ToList());
+			var tasks = _context.Tasks.ToList();
+
+			if (!searchString.IsNullOrWhiteSpace())
+			{
+				tasks = _context.Tasks
+					.Where(t => t.Name.Contains(searchString))
+					.ToList();
+			}
+
+			return View(tasks);
 		}
 
 		public ActionResult Details(int id)
