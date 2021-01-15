@@ -178,6 +178,10 @@
     <Compile Include="Migrations\202101130607064_CreateTableTasksInDatabase.Designer.cs">
       <DependentUpon>202101130607064_CreateTableTasksInDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101150618523_UpdateTaskModel.cs" />
+    <Compile Include="Migrations\202101150618523_UpdateTaskModel.Designer.cs">
+      <DependentUpon>202101150618523_UpdateTaskModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -267,6 +271,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202101130607064_CreateTableTasksInDatabase.resx">
       <DependentUpon>202101130607064_CreateTableTasksInDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101150618523_UpdateTaskModel.resx">
+      <DependentUpon>202101150618523_UpdateTaskModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
