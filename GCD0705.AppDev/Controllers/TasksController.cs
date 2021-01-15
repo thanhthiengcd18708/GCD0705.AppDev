@@ -1,6 +1,7 @@
 ﻿using GCD0705.AppDev.Models;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -17,11 +18,14 @@ namespace GCD0705.AppDev.Controllers
 		// GET: Tasks
 		public ActionResult Index(string searchString)
 		{
-			var tasks = _context.Tasks.ToList();
+			var tasks = _context.Tasks
+				.Include(m => m.Category)
+				.ToList();
 
 			if (!searchString.IsNullOrWhiteSpace())
 			{
 				tasks = _context.Tasks
+					.Include(m => m.Category)
 					.Where(t => t.Name.Contains(searchString))
 					.ToList();
 			}

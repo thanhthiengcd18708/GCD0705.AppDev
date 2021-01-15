@@ -182,10 +182,19 @@
     <Compile Include="Migrations\202101150618523_UpdateTaskModel.Designer.cs">
       <DependentUpon>202101150618523_UpdateTaskModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101150655154_AddCategoryTable.cs" />
+    <Compile Include="Migrations\202101150655154_AddCategoryTable.Designer.cs">
+      <DependentUpon>202101150655154_AddCategoryTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101150658332_AddFKToTaskModel.cs" />
+    <Compile Include="Migrations\202101150658332_AddFKToTaskModel.Designer.cs">
+      <DependentUpon>202101150658332_AddFKToTaskModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -274,6 +283,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101150618523_UpdateTaskModel.resx">
       <DependentUpon>202101150618523_UpdateTaskModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101150655154_AddCategoryTable.resx">
+      <DependentUpon>202101150655154_AddCategoryTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101150658332_AddFKToTaskModel.resx">
+      <DependentUpon>202101150658332_AddFKToTaskModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
