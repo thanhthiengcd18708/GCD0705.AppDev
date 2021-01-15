@@ -28,7 +28,7 @@
 	<div class="form-group">
 		@Html.LabelFor(model => model.Task.Category.Name)
 		@Html.DropDownListFor(model => model.Task.CategoryId,
-		 new SelectList(Model.Categories,"Id", "Name"),
+		 new SelectList(Model.Categories, "Id", "Name"),
 		 new { @class = "form-control" })
 		@Html.ValidationMessageFor(model => model.Task.CategoryId, "", new { @class = "text-danger" })
 	</div>

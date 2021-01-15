@@ -87,7 +87,12 @@ namespace GCD0705.AppDev.Controllers
 			var taskInDb = _context.Tasks.SingleOrDefault(t => t.Id == id);
 			if (taskInDb == null) return HttpNotFound();
 
-			return View(taskInDb);
+			var viewModel = new TaskCategoriesViewModel()
+			{
+				Task = taskInDb,
+				Categories = _context.Categories.ToList()
+			};
+			return View(viewModel);
 		}
 
 		[HttpPost]
@@ -95,13 +100,19 @@ namespace GCD0705.AppDev.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				return View(task);
+				var viewModel = new TaskCategoriesViewModel()
+				{
+					Task = task,
+					Categories = _context.Categories.ToList()
+				};
+				return View(viewModel);
 			}
 			var taskInDb = _context.Tasks.SingleOrDefault(t => t.Id == task.Id);
 
 			taskInDb.Name = task.Name;
 			taskInDb.Description = task.Description;
 			taskInDb.DueDate = task.DueDate;
+			taskInDb.CategoryId = task.CategoryId;
 
 			_context.SaveChanges();
 			return RedirectToAction("Index");
