@@ -1,4 +1,5 @@
 ﻿using GCD0705.AppDev.Models;
+using GCD0705.AppDev.ViewModels;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
@@ -53,7 +54,11 @@ namespace GCD0705.AppDev.Controllers
 		[HttpGet]
 		public ActionResult Create()
 		{
-			return View();
+			var viewModel = new TaskCategoriesViewModel()
+			{
+				Categories = _context.Categories.ToList()
+			};
+			return View(viewModel);
 		}
 
 		[HttpPost]
@@ -67,7 +72,8 @@ namespace GCD0705.AppDev.Controllers
 			{
 				Name = task.Name,
 				Description = task.Description,
-				DueDate = task.DueDate
+				DueDate = task.DueDate,
+				CategoryId = task.CategoryId
 			};
 
 			_context.Tasks.Add(newTask);
