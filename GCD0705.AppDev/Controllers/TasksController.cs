@@ -55,6 +55,10 @@ namespace GCD0705.AppDev.Controllers
 		[HttpPost]
 		public ActionResult Create(Task task)
 		{
+			if (!ModelState.IsValid)
+			{
+				return View();
+			}
 			var newTask = new Task()
 			{
 				Name = task.Name,
@@ -79,6 +83,10 @@ namespace GCD0705.AppDev.Controllers
 		[HttpPost]
 		public ActionResult Edit(Task task)
 		{
+			if (!ModelState.IsValid)
+			{
+				return View(task);
+			}
 			var taskInDb = _context.Tasks.SingleOrDefault(t => t.Id == task.Id);
 
 			taskInDb.Name = task.Name;
