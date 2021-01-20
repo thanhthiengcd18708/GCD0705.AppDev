@@ -52,7 +52,8 @@ namespace GCD0705.AppDev.Controllers
 			var taskUserInDb = _context.TaskUsers
 				.SingleOrDefault(t => t.TaskId == id && t.ApplicationUserId == currentUserId);
 
-			_context.TaskUsers.Remove(taskUserInDb);
+			if (taskUserInDb == null) return HttpNotFound();
+
 
 			var taskInDb = _context.Tasks.SingleOrDefault(t => t.Id == id);
 
@@ -106,6 +107,13 @@ namespace GCD0705.AppDev.Controllers
 		[HttpGet]
 		public ActionResult Edit(int id)
 		{
+			var currentUserId = User.Identity.GetUserId();
+
+			var taskUserInDb = _context.TaskUsers
+				.SingleOrDefault(t => t.TaskId == id && t.ApplicationUserId == currentUserId);
+
+			if (taskUserInDb == null) return HttpNotFound();
+
 			var taskInDb = _context.Tasks.SingleOrDefault(t => t.Id == id);
 			if (taskInDb == null) return HttpNotFound();
 
@@ -129,6 +137,14 @@ namespace GCD0705.AppDev.Controllers
 				};
 				return View(viewModel);
 			}
+
+			var currentUserId = User.Identity.GetUserId();
+
+			var taskUserInDb = _context.TaskUsers
+				.SingleOrDefault(t => t.TaskId == task.Id && t.ApplicationUserId == currentUserId);
+
+			if (taskUserInDb == null) return HttpNotFound();
+
 			var taskInDb = _context.Tasks.SingleOrDefault(t => t.Id == task.Id);
 
 			taskInDb.Name = task.Name;
