@@ -45,7 +45,15 @@ namespace GCD0705.AppDev.Controllers
 		}
 
 		public ActionResult Delete(int id)
+
 		{
+
+			var currentUserId = User.Identity.GetUserId();
+			var taskUserInDb = _context.TaskUsers
+				.SingleOrDefault(t => t.TaskId == id && t.ApplicationUserId == currentUserId);
+
+			_context.TaskUsers.Remove(taskUserInDb);
+
 			var taskInDb = _context.Tasks.SingleOrDefault(t => t.Id == id);
 
 			if (taskInDb == null) return HttpNotFound();
