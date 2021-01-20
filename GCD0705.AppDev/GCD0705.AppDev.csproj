@@ -191,6 +191,10 @@
     <Compile Include="Migrations\202101150658332_AddFKToTaskModel.Designer.cs">
       <DependentUpon>202101150658332_AddFKToTaskModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101150921008_AddTaskUsersTable.cs" />
+    <Compile Include="Migrations\202101150921008_AddTaskUsersTable.Designer.cs">
+      <DependentUpon>202101150921008_AddTaskUsersTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -198,6 +202,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\TaskUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\TaskCategoriesViewModel.cs" />
@@ -292,6 +297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101150658332_AddFKToTaskModel.resx">
       <DependentUpon>202101150658332_AddFKToTaskModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101150921008_AddTaskUsersTable.resx">
+      <DependentUpon>202101150921008_AddTaskUsersTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

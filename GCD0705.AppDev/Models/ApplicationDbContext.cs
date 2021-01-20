@@ -12,6 +12,7 @@ namespace GCD0705.AppDev.Models
 
 		public DbSet<Task> Tasks { get; set; }
 		public DbSet<Category> Categories { get; set; }
+		public DbSet<TaskUser> TaskUsers { get; set; }
 
 		public static ApplicationDbContext Create()
 		{

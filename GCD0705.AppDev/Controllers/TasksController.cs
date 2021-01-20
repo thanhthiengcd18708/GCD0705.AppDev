@@ -8,10 +8,10 @@ using System.Web.Mvc;
 
 namespace GCD0705.AppDev.Controllers
 {
+	[Authorize(Roles = "user")]
 	public class TasksController : Controller
 	{
 		private ApplicationDbContext _context;
-		private UserManager<ApplicationUser> _userManager;
 		public TasksController()
 		{
 			_context = new ApplicationDbContext();
@@ -19,16 +19,20 @@ namespace GCD0705.AppDev.Controllers
 		// GET: Tasks
 		public ActionResult Index(string searchString)
 		{
-			var tasks = _context.Tasks
+			var currentUserId = User.Identity.GetUserId();
+			var tasks = _context.TaskUsers
+				.Where(m => m.ApplicationUserId == currentUserId)
+				.Select(m => m.Task)
 				.Include(m => m.Category)
 				.ToList();
 
 			if (!searchString.IsNullOrWhiteSpace())
 			{
-				tasks = _context.Tasks
-					.Include(m => m.Category)
-					.Where(t => t.Name.Contains(searchString))
-					.ToList();
+				tasks = _context.TaskUsers
+				.Where(m => m.ApplicationUserId == currentUserId && m.Task.Name.Contains(searchString))
+				.Select(m => m.Task)
+				.Include(m => m.Category)
+				.ToList();
 			}
 
 			return View(tasks);
@@ -77,6 +81,16 @@ namespace GCD0705.AppDev.Controllers
 			};
 
 			_context.Tasks.Add(newTask);
+
+			var userId = User.Identity.GetUserId();
+			var taskUser = new TaskUser()
+			{
+				TaskId = newTask.Id,
+				ApplicationUserId = userId
+			};
+
+			_context.TaskUsers.Add(taskUser);
+
 			_context.SaveChanges();
 			return RedirectToAction("Index");
 		}
