@@ -5,9 +5,13 @@
 
 <h2>Index Task</h2>
 
-@Html.ActionLink("Create new Task", "Create", "Tasks",
-	null,
-	new { @class = "btn btn-primary" })
+@if (User.IsInRole("user"))
+{
+	@Html.ActionLink("Create new Task", "Create", "Tasks",
+null,
+new { @class = "btn btn-primary" })
+}
+
 
 @using (Html.BeginForm("Index", "Tasks", "POST"))
 {
@@ -27,7 +31,11 @@
 			<th>Task Name</th>
 			<th>Task Due Date</th>
 			<th>Category</th>
+			@if (User.IsInRole("iser"))
+			{
 			<th>Action</th>
+
+			}
 		</tr>
 	</thead>
 	<tbody>
@@ -38,7 +46,9 @@
 				<td>@item.Name</td>
 				<td>@item.DueDate.ToString()</td>
 				<td>@item.Category.Name</td>
-				<td>
+				@if (User.IsInRole("user"))
+				{
+										<td>
 					@Html.ActionLink("Details", "Details", "Tasks",
 								 new { id = item.Id },
 								 new { @class = "btn btn-primary" })
@@ -49,6 +59,8 @@
 								 new { id = item.Id },
 								 new { @class = "btn btn-danger" })
 				</td>
+				}
+
 			</tr>
 		}
 	</tbody>

@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace GCD0705.AppDev.Controllers
 {
-	[Authorize(Roles = "user")]
+	[Authorize]
 	public class TasksController : Controller
 	{
 		private ApplicationDbContext _context;
@@ -17,32 +17,45 @@ namespace GCD0705.AppDev.Controllers
 			_context = new ApplicationDbContext();
 		}
 		// GET: Tasks
+		[Authorize(Roles = "user, admin")]
 		public ActionResult Index(string searchString)
 		{
-			var currentUserId = User.Identity.GetUserId();
-			var tasks = _context.TaskUsers
-				.Where(m => m.ApplicationUserId == currentUserId)
-				.Select(m => m.Task)
-				.Include(m => m.Category)
-				.ToList();
 
-			if (!searchString.IsNullOrWhiteSpace())
+			if (User.IsInRole("user"))
 			{
-				tasks = _context.TaskUsers
-				.Where(m => m.ApplicationUserId == currentUserId && m.Task.Name.Contains(searchString))
-				.Select(m => m.Task)
-				.Include(m => m.Category)
-				.ToList();
+				var currentUserId = User.Identity.GetUserId();
+				var tasks = _context.TaskUsers
+					.Where(m => m.ApplicationUserId == currentUserId)
+					.Select(m => m.Task)
+					.Include(m => m.Category)
+					.ToList();
+
+				if (!searchString.IsNullOrWhiteSpace())
+				{
+					tasks = _context.TaskUsers
+					.Where(m => m.ApplicationUserId == currentUserId && m.Task.Name.Contains(searchString))
+					.Select(m => m.Task)
+					.Include(m => m.Category)
+					.ToList();
+				}
+
+				return View(tasks);
 			}
 
-			return View(tasks);
+			return View(_context.Tasks
+				.Include(t => t.Category)
+				.ToList());
+
 		}
 
+		[Authorize(Roles = "user")]
 		public ActionResult Details(int id)
 		{
 			Task taskInDb = _context.Tasks.SingleOrDefault(t => t.Id == id);
 			return View(taskInDb);
 		}
+		[Authorize(Roles = "user")]
+
 
 		public ActionResult Delete(int id)
 
@@ -65,6 +78,8 @@ namespace GCD0705.AppDev.Controllers
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "user")]
+
 		public ActionResult Create()
 		{
 			var viewModel = new TaskCategoriesViewModel()
@@ -75,6 +90,8 @@ namespace GCD0705.AppDev.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "user")]
+
 		public ActionResult Create(Task task)
 		{
 			if (!ModelState.IsValid)
@@ -105,6 +122,8 @@ namespace GCD0705.AppDev.Controllers
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "user")]
+
 		public ActionResult Edit(int id)
 		{
 			var currentUserId = User.Identity.GetUserId();
@@ -126,6 +145,8 @@ namespace GCD0705.AppDev.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "user")]
+
 		public ActionResult Edit(Task task)
 		{
 			if (!ModelState.IsValid)

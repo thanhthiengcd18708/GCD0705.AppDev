@@ -2,6 +2,7 @@
 
 namespace GCD0705.AppDev.Controllers
 {
+	[AllowAnonymous]
 	public class HomeController : Controller
 	{
 		public ActionResult Index()
